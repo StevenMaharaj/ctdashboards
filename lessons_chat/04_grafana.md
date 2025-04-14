@@ -14,22 +14,6 @@ By the end of this lesson you will be able to:
 6. Automate provisioning with code and integrate Grafana into CI/CD.
 7. Scale Grafana for high availability and performance.
 
-> **Prerequisites**: Familiarity with Linux command line, basic understanding of metrics/logs, and access to at least one data source (Prometheus, SQL DB, or sample data).
-
----
-
-## 2. Architecture & Core Components
-
-| Layer | Component | Purpose |
-|-------|-----------|---------|
-| **Frontend** | React/TypeScript SPA | Dashboards, Explore, Alerting UI |
-| **Backend** | Go HTTP server (`grafana‑server`) | API, auth, data source proxies, alerting engine |
-| **Database** | SQLite (default) / MySQL / PostgreSQL | Stores dashboards, users, alert rules, etc. |
-| **Data Sources** | Plugins or built‑ins | Prometheus, Loki, PostgreSQL, Elasticsearch, CloudWatch, … |
-| **Plugins** | Panels, apps, data sources | Extend functionality (e.g., WorldMap, Zabbix) |
-| **Renderer** | `grafana-image-renderer` | Generates PNG/PDF for reporting |
-
-Grafana **does not** store your metrics/logs by default—it queries them on demand and caches results in memory.
 
 ---
 
@@ -42,70 +26,19 @@ docker run -d --name=grafana \
   -e "GF_SECURITY_ADMIN_PASSWORD=secret" \
   grafana/grafana-oss:10.2.3
 ```
+or just use the provided docker compose file to get it running
 *Browse* `http://localhost:3000` → user **admin / secret**.
-
-### 3.2 Linux Packages (Deb/RPM)
-```bash
-# Debian/Ubuntu
-sudo apt-get install -y apt-transport-https software-properties-common wget
-wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
-add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
-sudo apt update && sudo apt install grafana
-sudo systemctl enable --now grafana-server
 ```
-
-### 3.3 Helm on Kubernetes
-```bash
-helm repo add grafana https://grafana.github.io/helm-charts
-helm upgrade --install grafana grafana/grafana \
-  --namespace monitoring --create-namespace \
-  --set adminPassword=secret \
-  --set persistence.enabled=true
-```
-
-### 3.4 Grafana Cloud
-Sign up at <https://grafana.com> for a hosted instance (free tier includes 10k metrics, 50GB logs, 50GB traces).
-
----
-
-## 4. Configuration Basics (`grafana.ini`)
-*Location*: `/etc/grafana/grafana.ini` or override with `GF_` env vars.
-
-Key sections:
-```ini
-[server]
-protocol = http
-http_port = 3000
-root_url = %(protocol)s://grafana.example.com/
-
-[database]
-;sqlite3, mysql, postgres
-type = postgres
-host = 127.0.0.1:5432
-database = grafana
-user = grafana
-password = supersecret
-
-[security]
-admin_user = admin
-admin_password = change_me
-
-[auth]
-disable_login_form = false
-```
-Restart service after changes.
 
 ---
 
 ## 5. Data Sources Deep Dive
-
-### 5.1 Adding via UI
 1. **Gear icon → Data sources → Add data source**.
 2. Pick a type (e.g., *Prometheus*).
 3. Enter URL, access mode (server/browser), and credentials.
 4. Click **Save & Test**.
 
-### 5.2 Popular Sources & Nuances
+### 5.1 Popular Sources & Nuances
 | Source | Query Language | Notable Features |
 |--------|---------------|------------------|
 | **Prometheus / Mimir** | PromQL | Native alert rules, auto‑completion, metric math |
