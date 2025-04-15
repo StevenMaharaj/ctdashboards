@@ -2,6 +2,7 @@ import random
 from datetime import datetime, timedelta
 import argparse
 from db_writer import DBWriter
+from time import sleep
 
 
 def generate_ob_data(n=1000):
@@ -27,8 +28,29 @@ def generate_ob_data(n=1000):
                 "symbol": symbol,
             }
         )
-
     return ob_data
+
+def generate_ob_data_live(n=1000):
+    """
+    Generate order book data with random prices, quantities, and timestamps.
+    """
+
+    # Generate random order book data
+    ask = 50
+    dt = datetime.now()
+    symbol = "ETHUSDT"
+    for i in range(n):
+        sleep(1)
+        ask += random.uniform(-0.1, 0.1)
+        spread = random.uniform(0.01, 0.1)
+        bid = ask - spread
+        dt = datetime.now()
+        yield [{
+                "bid": bid,
+                "ask": ask,
+                "time": dt.strftime("%Y-%m-%d %H:%M:%S"),
+                "symbol": symbol,
+            }]
 
 def main():
     # Set up argument parser
@@ -46,6 +68,10 @@ def main():
         print("Generating real-time data...")
         # Here you would implement the logic for generating real-time data
         # For now, we will just print a message
+        for data in generate_ob_data_live(n=args.number):
+            wrt.write("order_book", data)
+            print(data)
+            sleep(1)
     else:
         print("Generating static data...")
         ob_data = generate_ob_data(n=args.number)
