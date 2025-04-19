@@ -80,3 +80,6 @@ def main():
     # Write trade data to database
     wrt = DBWriter()
     wrt.write(table="trades", data=trade_data)
+
+if __name__ == "__main__":
+    main()
