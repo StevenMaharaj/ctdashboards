@@ -124,6 +124,63 @@ VALUES ('Haruki Murakami', 'Japan', 1949),
 RETURNING *;  -- handy Postgres extension
 ```
 
+Extra Data
+
+```sql
+INSERT INTO authors (name, country,birth_year)
+VALUES
+    ('J.K. Rowling', 'United Kingdom', 1965),
+    ('Stephen King', 'United States', 1947),
+    ('Agatha Christie', 'United Kingdom', 1890),
+    ('J.R.R. Tolkien', 'United Kingdom', 1892),
+    ('Isaac Asimov', 'Russia', 1920),
+    ('F. Scott Fitzgerald', 'United States', 1896),
+    ('Jane Austen', 'United Kingdom', 1775),
+    ('Mark Twain', 'United States', 1835),
+    ('Ernest Hemingway', 'United States', 1899),
+    ('Gabriel García Márquez', 'Colombia', 1927),
+    ('Leo Tolstoy', 'Russia', 1828),
+    ('Virginia Woolf', 'United Kingdom', 1882),
+    ('Charles Dickens', 'United Kingdom', 1812),
+    ('Herman Melville', 'United States', 1819),
+    ('Franz Kafka', 'Austria-Hungary', 1883),
+    ('George Orwell', 'United Kingdom', 1903),
+    ('Harper Lee', 'United States', 1926),
+    ('J.D. Salinger', 'United States', 1919),
+    ('Toni Morrison', 'United States', 1931),
+    ('Margaret Atwood', 'Canada', 1939),
+    ('Neil Gaiman', 'United Kingdom', 1960);
+
+
+
+INSERT INTO authors (name, country)
+VALUES
+    ('Dan Brown', 'United States'),
+    ('Paulo Coelho', 'Brazil'),
+    ('John Grisham', 'United States'),
+    ('Danielle Steel', 'United States'),
+    ('Stephenie Meyer', 'United States'),
+    ('Suzanne Collins', 'United States'),
+    ('C.S. Lewis', 'United Kingdom'),
+    ('George R.R. Martin', 'United States'),
+    ('Haruki Murakami', 'Japan'),
+    ('Chimamanda Ngozi Adichie', 'Nigeria');
+```
+
+```sql
+INSERT INTO books (title, published, author_id,price,in_stock)
+VALUES
+    ('Harry Potter and the Philosopher Stone', '1997-06-26', 1,10.50,TRUE),
+    ('Harry Potter and the Chamber of Secrets', '1998-07-02', 1,10.50,TRUE),
+    ('A Game of Thrones', '1996-08-06', 2,10.50,TRUE),
+    ('A Clash of Kings', '1998-11-16', 2,10.50,TRUE),
+    ('Norwegian Wood', '1987-09-04', 3,10.50,TRUE),
+    ('Kafka on the Shore', '2002-09-12', 3,10.50,TRUE),
+    ('Half of a Yellow Sun', '2006-09-12', 4,10.50,TRUE),
+    ('Americanah', '2013-05-14', 4,10.50,TRUE);
+```
+
+
 ### 8.2 SELECT
 ```sql
 -- all columns
