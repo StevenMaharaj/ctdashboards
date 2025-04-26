@@ -13,6 +13,16 @@
             "database": "grafana",
             "username": "admin",
             "name": "docker"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "bookstore",
+            "database": "bookstore",
+            "username": "admin",
+            "password": "admin_password"
         }
     ]
 }
