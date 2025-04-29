@@ -1,3 +1,20 @@
+
+## Calculate Position
+Assuming we're starting with a 0 position the running position is just going to be the cumulative sum of the trade quantities.
+
+```sql
+SELECT 
+    time,
+    price,
+    qty,
+    SUM(qty) OVER (ORDER BY time) AS pos
+FROM 
+    public.trades
+-- LIMIT 10;
+```
+
+
+
 To calculate cumulative position (CUMSUM of qty), realized PnL, and unrealized PnL, you can use SQL window functions. Here's how you can structure the query:
 
 Assumptions:

@@ -21,9 +21,9 @@ def generate_trade_data(n=1000, symbol="ETHUSDT"):
     while n_trades < n:
         price += random.uniform(-0.1, 0.1)
         qty = random.choices(qty_values, weights=qty_probabilities, k=1)[0]
+        dt = dt - timedelta(seconds=1)
         if qty == 0:
             continue
-        dt = dt - timedelta(seconds=1)
         trade_data.append(
             {
                 "price": price,

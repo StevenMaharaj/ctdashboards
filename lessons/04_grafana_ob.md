@@ -46,4 +46,5 @@ ORDER BY time DESC
 LIMIT 100;
 ```
 
-
+## Explore Grafana features
+Please refer to the video found here.

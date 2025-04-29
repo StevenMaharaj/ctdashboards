@@ -5,4 +5,4 @@ SELECT
     SUM(qty) OVER (ORDER BY time) AS pos
 FROM 
     public.trades
-LIMIT 10;
+-- LIMIT 10;
