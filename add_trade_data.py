@@ -3,6 +3,7 @@ import random
 import argparse
 from db_writer import DBWriter
 
+
 def generate_trade_data(n=1000, symbol="ETHUSDT"):
     """
     Generate trade data with random prices, quantities, and timestamps.
