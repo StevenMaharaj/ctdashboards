@@ -19,7 +19,7 @@ We will separate the trade into 2 series. Buy trades and Sell trades. Then plot 
 ```sql
 SELECT
   time,
-  CASE WHEN qty > 0 THEN price END AS price_up,
-  CASE WHEN qty < 0 THEN price END AS price_down
+  CASE WHEN qty > 0 THEN price END AS buys,
+  CASE WHEN qty < 0 THEN price END AS sells
 FROM public.trades
 ```
